@@ -1,0 +1,9 @@
+.navbar-nav{
+    flex-direction: row !important;
+}
+a{
+    color: black !important;
+}
+a:hover{
+    text-decoration: none !important;
+}
