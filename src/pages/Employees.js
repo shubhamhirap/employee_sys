@@ -6,7 +6,6 @@ import SearchBar from "../components/SearchBar";
 
 let data = [];
 const Employees = () => {
- 
   let [filterData, setFilterData] = useState([]);
   let [tempData, setTempData] = useState([]);
   const [perPage] = useState(5);
@@ -24,17 +23,20 @@ const Employees = () => {
       });
   }, []);
 
-
   const searchRes = (searchQuery) => {
     let filteredData = JSON.parse(JSON.stringify(data));
-    setTempData(filteredData.filter(data => data.employee_name.toLowerCase().includes(searchQuery.toLowerCase())));
+    setTempData(
+      filteredData.filter((data) =>
+        data.employee_name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
   };
-  
+
   useEffect(() => {
     const indexOfLastEmp = currentPage * perPage;
     const indexOfFirstEmp = indexOfLastEmp - perPage;
     setFilterData(tempData.slice(indexOfFirstEmp, indexOfLastEmp));
-  }, [tempData, currentPage]) 
+  }, [tempData, currentPage]);
 
   const prevPaginate = (pageNumber) => {
     setCurrentPage(pageNumber - 1);
@@ -70,12 +72,16 @@ const Employees = () => {
                 <td>{emp.employee_salary}</td>
                 <td>{emp.employee_age}</td>
                 <td>
-                <Link
-                    to={{pathname:`/employee/${emp.employee_name}${emp.id}`, state:{emp}}}
+                  <Link
+                    to={{
+                      pathname: `/employee/${emp.employee_name}${emp.id}`,
+                      state: { emp },
+                    }}
                     key={emp.id}
                   >
                     Details
-                  </Link>                </td>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
