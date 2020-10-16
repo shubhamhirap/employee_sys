@@ -34,7 +34,17 @@ const Employees = () => {
   const indexOfFirstEmp = indexOfLastEmp - perPage;
   filterData = data.slice(indexOfFirstEmp, indexOfLastEmp);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const prevPaginate = (pageNumber) => {
+    setCurrentPage(pageNumber - 1);
+  };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const nextPaginate = (pageNumber) => {
+    setCurrentPage(pageNumber + 1);
+  };
 
   return (
     <>
@@ -73,6 +83,9 @@ const Employees = () => {
           perPage={perPage}
           totalEmp={data.length}
           paginate={paginate}
+          prevPaginate={prevPaginate}
+          nextPaginate={nextPaginate}
+          currentPage={currentPage}
         />
       </div>
     </>

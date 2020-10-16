@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Pagination = ({ perPage, totalEmp, paginate }) => {
+const Pagination = ({ currentPage ,perPage, totalEmp, paginate, prevPaginate, nextPaginate }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalEmp / perPage); i++) {
@@ -11,6 +11,9 @@ const Pagination = ({ perPage, totalEmp, paginate }) => {
   return (
     <nav>
       <ul className="pagination">
+        <li className="page-item">
+          <a className="page-link" onClick={() => prevPaginate(currentPage)}>prev</a>
+        </li>
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <a className="page-link" onClick={() => paginate(number)}>
@@ -18,6 +21,9 @@ const Pagination = ({ perPage, totalEmp, paginate }) => {
             </a>
           </li>
         ))}
+        <li className="page-item">
+          <a className="page-link" onClick={() => nextPaginate(currentPage)}>next</a>
+        </li>
       </ul>
     </nav>
   );
