@@ -1,7 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Pagination = ({ currentPage ,perPage, totalEmp, paginate, prevPaginate, nextPaginate }) => {
+const Pagination = ({
+  currentPage,
+  perPage,
+  totalEmp,
+  paginate,
+  prevPaginate,
+  nextPaginate,
+}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalEmp / perPage); i++) {
@@ -11,9 +17,13 @@ const Pagination = ({ currentPage ,perPage, totalEmp, paginate, prevPaginate, ne
   return (
     <nav>
       <ul className="pagination">
-        <li className="page-item">
-          <a className="page-link" onClick={() => prevPaginate(currentPage)}>prev</a>
-        </li>
+        {currentPage > 1 && (
+          <li className="page-item">
+            <a className="page-link" onClick={() => prevPaginate(currentPage)}>
+              prev
+            </a>
+          </li>
+        )}
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <a className="page-link" onClick={() => paginate(number)}>
@@ -21,9 +31,13 @@ const Pagination = ({ currentPage ,perPage, totalEmp, paginate, prevPaginate, ne
             </a>
           </li>
         ))}
-        <li className="page-item">
-          <a className="page-link" onClick={() => nextPaginate(currentPage)}>next</a>
-        </li>
+        {currentPage < Math.ceil(totalEmp / perPage) && (
+          <li className="page-item">
+            <a className="page-link" onClick={() => nextPaginate(currentPage)}>
+              next
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
   );

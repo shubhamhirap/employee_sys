@@ -3,34 +3,39 @@ import axios from "axios";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-
-//   var sortedData = [];
-//   let filterData = data;
-//   let regex = new RegExp(/^\b(?=\w*[ai])\w+\b$/);
-
-//   filterData = filterData.sort((emp) => {
-//     const e_name = emp.employee_name;
-//     if (e_name.match(regex)) {
-//       console.log("here");
-//       return sortedData.push(emp.employee_name);
-//     }
-//   });
   useEffect(() => {
     axios
       .get(`http://dummy.restapiexample.com/api/v1/employees`)
       .then((res) => {
-        console.log(res.data);
-        setData(res.data.data);
+        let data = res.data.data.filter(
+          (data) =>
+            data.employee_name.toLowerCase().includes("a") ||
+            data.employee_name.toLowerCase().includes("i")
+        );
+        setData(data);
       })
       .catch((e) => console.log(e));
   }, []);
   return (
-    <div>
-      <ol className="mt-2">
-        {data.map((emp) => (
-          <li key={emp.id}>{emp.employee_name}</li>
-        ))}
-      </ol>
+    <div className="col-6 m-auto">
+      <table className="table table-striped table-bordered responsive mt-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Employee Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((emp, i) => (
+            <tr key={emp.id}>
+              <td>{i+1}</td>
+              <td>{emp.id}</td>
+              <td>{emp.employee_name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
