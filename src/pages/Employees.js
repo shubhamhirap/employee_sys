@@ -36,7 +36,7 @@ const Employees = () => {
     const indexOfLastEmp = currentPage * perPage;
     const indexOfFirstEmp = indexOfLastEmp - perPage;
     setFilterData(tempData.slice(indexOfFirstEmp, indexOfLastEmp));
-  }, [tempData, currentPage]);
+  }, [perPage,tempData, currentPage]);
 
   const prevPaginate = (pageNumber) => {
     setCurrentPage(pageNumber - 1);
@@ -66,7 +66,7 @@ const Employees = () => {
           </thead>
           <tbody>
             {filterData.map((emp) => (
-              <tr>
+              <tr key={emp.id}>
                 <td>{emp.id}</td>
                 <td>{emp.employee_name}</td>
                 <td>{emp.employee_salary}</td>

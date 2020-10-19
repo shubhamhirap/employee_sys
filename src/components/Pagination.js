@@ -19,23 +19,38 @@ const Pagination = ({
       <ul className="pagination">
         {currentPage > 1 && (
           <li className="page-item">
-            <a className="page-link" onClick={() => prevPaginate(currentPage)}>
+            {/* <a className="page-link" onClick={() => prevPaginate(currentPage)}>
               prev
-            </a>
+            </a> */}
+            <button
+              className="page-link"
+              onClick={() => prevPaginate(currentPage)}
+            >
+              prev
+            </button>
           </li>
         )}
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
-            <a className="page-link" onClick={() => paginate(number)}>
+            {/* <a className="page-link" onClick={() => paginate(number)}>
               {number}
-            </a>
+            </a> */}
+            <button className="page-link" onClick={() => paginate(number)}>
+              {number}
+            </button>
           </li>
         ))}
         {currentPage < Math.ceil(totalEmp / perPage) && (
           <li className="page-item">
-            <a className="page-link" onClick={() => nextPaginate(currentPage)}>
+            {/* <a className="page-link" onClick={() => nextPaginate(currentPage)}>
               next
-            </a>
+            </a> */}
+            <button
+              className="page-link"
+              onClick={() => nextPaginate(currentPage)}
+            >
+              next
+            </button>
           </li>
         )}
       </ul>
