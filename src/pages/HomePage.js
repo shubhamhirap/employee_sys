@@ -9,7 +9,7 @@ const HomePage = () => {
       .then((res) => {
         let data = res.data.data.filter(
           (data) =>
-            data.employee_name.toLowerCase().includes("a") ||
+            data.employee_name.toLowerCase().includes("a") &&
             data.employee_name.toLowerCase().includes("i")
         );
         setData(data);
